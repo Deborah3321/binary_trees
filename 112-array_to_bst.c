@@ -1,49 +1,21 @@
 #include "binary_trees.h"
 
 /**
- * bst_insert - insert a new node in a Binary Search Tree
- * @tree: a pointer to the first node
- * @value: int value
+ * array_to_bst - insert a new node in a Binary Search Tree
+ * @array: arrya to use
+ * @size: array size
  *
  * Return: If no common ancestor was found return NULL
  */
-bst_t *bst_insert(bst_t **tree, int value)
+bst_t *array_to_bst(int *array, size_t size)
 {
-	bst_t *tmp;
+	bst_t *new_node = NULL;
 
-	if (tree != NULL)
+	unsigned int index;
+
+	for (index = 0; index < size; index++)
 	{
-		if (*tree == NULL)
-		{
-			*tree = binary_tree_node(NULL, value);
-			return (*tree);
-		}
-		tmp = *tree;
-		while (tmp)
-		{
-			if (tmp->n == value)
-			{
-				break;
-			}
-			if (tmp->n > value)
-			{
-				if (tmp->left == NULL)
-				{
-					tmp->left = binary_tree_node(tmp, value);
-					return (tmp->left);
-				}
-				tmp = tmp->left;
-			}
-			if (tmp->n < value)
-			{
-				if (tmp->right == NULL)
-				{
-					tmp->right = binary_tree_node(tmp, value);
-					return (tmp->right);
-				}
-				tmp = tmp->right;
-			}
-		}
+		bst_insert(&new_node, array[index]);
 	}
-	return (NULL);
+	return (new_node);
 }
